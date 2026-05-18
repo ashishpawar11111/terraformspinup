@@ -3,11 +3,12 @@
 THRESHOLD=$1
 PID=$2
 LOGFILE=/var/log/rss_alerts.log
+EMAIL="siridevelopers211@gmail.com"
 while true; do
     RSS=$(grep VmRSS /proc/$PID/status | awk '{print $2}')
     if [ "$RSS" -gt "$THRESHOLD" ]; then
         echo "Memory usage exceeded threshold: $RSS KB" >> "$LOGFILE"
-        echo "Memory usage exceeded threshold: $RSS KB"
+        echo "Memory usage exceeded threshold: $RSS KB" | mail -s "RSS Alert" "$EMAIL"
     fi
     sleep 3 # Wait for 3 Sec before checking again
 done

@@ -3,4 +3,6 @@
 *.tfstate
 *.tfstate.backup
 crash.log
+.terraform.tfstate.backup
+demoec.pem
 

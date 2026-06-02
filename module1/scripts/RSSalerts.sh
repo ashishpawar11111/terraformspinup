@@ -5,7 +5,7 @@ PID=$2
 LOGFILE=/var/log/rss_alerts.log
 EMAIL="siridevelopers211@gmail.com"
 while true; do
-    RSS=$(grep VmRSS /proc/$PID/status | awk '{print $2}')
+    RSS=$(grep VmRSS /proc/$PID/status | awk '{print $2}') # Get the Resident Set Size (RSS) memory usage in KB of a VM process
     if [ "$RSS" -gt "$THRESHOLD" ]; then
         echo "Memory usage exceeded threshold: $RSS KB" >> "$LOGFILE"
         echo "Memory usage exceeded threshold: $RSS KB" | mail -s "RSS Alert" "$EMAIL"
